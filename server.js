@@ -1,7 +1,10 @@
-const express = require('express');
-const path    = require('path');
-const app     = express();
-const port    = process.env.PORT || 5000;
+const express    = require('express');
+const path       = require('path');
+const app        = express();
+const port       = process.env.PORT || 5000;
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 const TriviaFetcher = require("./handlers/triviaFetcher");
 
@@ -16,6 +19,12 @@ app.get('/api/questions', (req, res) => {
             res.send({ response });
         }
     });
+});
+
+app.post('/api/questions', (req, res) => {
+    console.log('reached post on server', req.body);
+
+    return res.send({ "test": "testing" })
 });
 
 if (process.env.NODE_ENV === 'production') {
