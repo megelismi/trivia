@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
 import '../App.css';
 
@@ -9,7 +10,8 @@ import SelectField from '../component/Form/Field/SelectField';
 
 import {
     TRIVIA_CATEGORIES_OPTIONS,
-    DIFFICULTY_OPTIONS
+    DIFFICULTY_OPTIONS,
+    AMOUNT_OPTIONS
 } from '../constants/game';
 
 import { fetchQuestions } from "../actions/game";
@@ -21,7 +23,8 @@ class HomePage extends Component {
         this.state = {
             gameFilters: {
                 category:   TRIVIA_CATEGORIES_OPTIONS[0].value,
-                difficulty: DIFFICULTY_OPTIONS[0].value
+                difficulty: DIFFICULTY_OPTIONS[0].value,
+                amount:     AMOUNT_OPTIONS[0].label
             }
         };
 
@@ -29,16 +32,16 @@ class HomePage extends Component {
         this.startGame              = this.startGame.bind(this);
     }
 
-    handleClick() {
-        this.callApi()
-            .then(res => this.setState({ response: res.response }))
-            .catch(err => console.log(err));
-    }
-
     startGame() {
-        const { category, difficulty } = this.state.gameFilters;
+        const {
+            category,
+            difficulty,
+            amount
+        } = this.state.gameFilters;
 
-        this.props.dispatch(fetchQuestions({ category, difficulty }));
+        this.props.history.push('/game');
+
+        this.props.dispatch(fetchQuestions({ category, difficulty, amount }));
     }
 
     handleGameFilterChange(value, name) {
@@ -49,15 +52,6 @@ class HomePage extends Component {
             }
         })
     }
-
-    callApi = async () => {
-        const response = await fetch('/api/questions');
-        const body     = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
 
     render() {
         return (
@@ -78,6 +72,13 @@ class HomePage extends Component {
                     options={ DIFFICULTY_OPTIONS }
                 />
 
+                <SelectField
+                    name="amoutn"
+                    label="Amount of Questions"
+                    onChange={ this.handleGameFilterChange }
+                    options={ AMOUNT_OPTIONS }
+                />
+
                 <Button
                     type="primary"
                     onClick={ this.startGame }
@@ -89,5 +90,5 @@ class HomePage extends Component {
     }
 }
 
-export default connect()(HomePage);
+export default withRouter(connect()(HomePage));
 

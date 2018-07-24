@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import HomePage from './page/HomePage';
-import TestPage from './page/TestPage';
+import GamePage from './page/GamePage';
 
 import './index.css';
 
@@ -19,7 +19,7 @@ const App = () => {
             <Router>
                 <Switch>
                     <Route exact path="/" component={ HomePage } />
-                    <Route exact path="/test" component={ TestPage } />
+                    <Route exact path="/game" component={ GamePage } />
                 </Switch>
             </Router>
         </Provider>

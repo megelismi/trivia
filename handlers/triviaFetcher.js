@@ -7,12 +7,10 @@ class TriviaFetcher {
      *
      */
 
-    constructor() {
-        // this._flightNumber = flightNumber.toLowerCase();
-        // this._flightDate = flightDate.toLowerCase();
-        // this._departureAirport = departureAirport.toUpperCase();
-        // this._appId = process.env.FLIGHT_STATS_APP_ID;
-        // this._appKey = process.env.FLIGHT_STATS_APP_KEY;
+    constructor(category, difficulty, amount) {
+        this._category   = category   && category.length   ? parseInt(category)       : undefined;
+        this._difficulty = difficulty && difficulty.length ? difficulty.toLowerCase() : undefined;
+        this._amount     = amount     && amount.length     ? parseInt(amount)         : 10;
     }
 
     /**
@@ -60,7 +58,19 @@ class TriviaFetcher {
      */
 
     _urlPath() {
-        return `/api.php?amount=10`;
+        //https://opentdb.com/api.php?amount=10&category=9&difficulty=medium
+
+        let baseUrl = '/api.php?amount=' + this._amount;
+
+        if (this._category) {
+            baseUrl += '&category=' + this._category;
+        }
+
+        if (this._level) {
+           baseUrl += '&difficulty=' + this._difficulty;
+        }
+
+        return baseUrl;
     }
 }
 

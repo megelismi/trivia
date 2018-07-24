@@ -9,22 +9,20 @@ app.use(bodyParser.json());
 const TriviaFetcher = require("./handlers/triviaFetcher");
 
 // API calls
-app.get('/api/questions', (req, res) => {
-    const fetcher = new TriviaFetcher();
-
-    fetcher.fetchQuestions((err, response) => {
-        console.log('response', response)
-
-        if (!err) {
-            res.send({ response });
-        }
-    });
-});
 
 app.post('/api/questions', (req, res) => {
-    console.log('reached post on server', req.body);
+    const { category, difficulty, amount } = req.body;
 
-    return res.send({ "test": "testing" })
+    const fetcher = new TriviaFetcher(category, difficulty, amount);
+
+    fetcher.fetchQuestions((err, questions) => {
+        if (err) {
+           return  res.send({ err });
+        }
+        else {
+            return res.send({ questions });
+        }
+    });
 });
 
 if (process.env.NODE_ENV === 'production') {

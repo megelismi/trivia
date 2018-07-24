@@ -1,4 +1,5 @@
 import {
+    LOADING_QUESTIONS,
     RECEIVE_QUESTIONS_ERROR,
     RECEIVE_QUESTIONS_SUCCESS
 } from '../constants/game';
@@ -17,14 +18,20 @@ export const receiveQuestionsError = error => {
     }
 };
 
+export const loadingQuestions = () => {
+    return {
+        type: LOADING_QUESTIONS
+    }
+};
+
 export const fetchQuestions = data => {
     return async dispatch => {
-        try {
-            console.log('fetch questions reached', data);
+        dispatch(loadingQuestions());
 
+        try {
             const response = await fetch('/api/questions', {
-                method: 'POST',
-                body:   JSON.stringify(data),
+                method:  'POST',
+                body:    JSON.stringify(data),
                 headers: {
                     'Content-type': 'application/json; charset=utf-8'
                 },
@@ -32,7 +39,7 @@ export const fetchQuestions = data => {
 
             const questions = await response.json();
 
-            dispatch(receiveQuestionsSuccess(questions))
+            dispatch(receiveQuestionsSuccess(questions.questions));
         }
         catch (error) {
             dispatch(receiveQuestionsError(error))

@@ -1,8 +1,46 @@
+export const LOADING_QUESTIONS         = 'LOADING_QUESTIONS';
 export const RECEIVE_QUESTIONS_SUCCESS = 'RECEIVE_QUESTIONS_SUCCESS';
 export const RECEIVE_QUESTIONS_ERROR   = 'RECEIVE_QUESTIONS_ERROR';
 
 
+export const AMOUNT_OPTIONS = [
+    {
+        "label": "10"
+    },
+    {
+        "label": "20"
+    },
+    {
+        "label": "30"
+    },
+    {
+        "label": "40"
+    },
+    {
+        "label": "50"
+    },
+    {
+        "label": "60"
+    },
+    {
+        "label": "70"
+    },
+    {
+        "label": "80"
+    },
+    {
+        "label": "90"
+    },
+    {
+        "label": "100"
+    }
+];
+
 export const DIFFICULTY_OPTIONS = [
+    {
+        "value": "",
+        "label": "Any"
+    },
     {
         "value": "easy",
         "label": "Easy"
@@ -18,6 +56,10 @@ export const DIFFICULTY_OPTIONS = [
 ];
 
 export const TRIVIA_CATEGORIES_OPTIONS = [
+    {
+        "value": "",
+        "label": "Any"
+    },
     {
         "value": 9,
         "label": "General Knowledge"

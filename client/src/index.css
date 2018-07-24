@@ -11,6 +11,7 @@ body {
 .page {
   height: 100vh;
   background-color: #EFF4F9;
+  padding: 20px;
 }
 
 /* button styles */

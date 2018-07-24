@@ -1,7 +1,8 @@
 import { USER_RECEIVED } from '../actions/user';
 
 const initialState = {
-    user: null
+    user:         null,
+    currentScore: { correct: 0, incorrect: 0 }
 };
 
 const user = (state = initialState, action) => {
