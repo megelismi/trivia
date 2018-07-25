@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import StatusBoard from '../component/Game/StatusBoard';
 import Question from '../component/Game/Question';
 
-class GamePage extends React.Component {
+export class GamePage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -26,33 +26,33 @@ class GamePage extends React.Component {
     }
 
     getNextQuestion() {
-        console.log('hello');
-
         this.setState({ currentQuestion: this.state.currentQuestion+1 })
     }
 
     render() {
-        if (this.props.loading && !this.props.questions.length) {
+        if (this.props.loading) {
             return <div>loading...</div>;
         }
-console.log(this.props.questions[this.state.currentQuestion] );
-        return (
-            <div className="page game-page">
-                <StatusBoard
-                    totalQuestions={ this.props.questions.length }
-                    { ...this.state }
-                />
 
-                { this.props.questions[this.state.currentQuestion] ?
-                    <Question
-                        lastQuestion={ this.state.currentQuestion === this.props.questions.length-1 }
-                        currentQuestion={ this.state.currentQuestion + 1}
-                        question={ this.props.questions[this.state.currentQuestion] }
-                        onQuestionSubmit={ this.getNextQuestion }
+        if (this.props.questions && this.props.questions.length) {
+            return (
+                <div className="page game-page">
+                    <StatusBoard
+                        totalQuestions={this.props.questions.length}
+                        {...this.state}
                     />
-                : null }
-            </div>
-        );
+
+                    {this.props.questions && this.props.questions[this.state.currentQuestion] ?
+                        <Question
+                            lastQuestion={this.state.currentQuestion === this.props.questions.length - 1}
+                            currentQuestion={this.state.currentQuestion + 1}
+                            question={this.props.questions[this.state.currentQuestion]}
+                            onQuestionSubmit={this.getNextQuestion}
+                        />
+                        : null}
+                </div>
+            );
+        }
     }
 }
 

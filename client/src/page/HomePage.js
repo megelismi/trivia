@@ -16,7 +16,7 @@ import {
 
 import { fetchQuestions } from "../actions/game";
 
-class HomePage extends Component {
+export class HomePage extends Component {
     constructor(props) {
         super(props);
 
