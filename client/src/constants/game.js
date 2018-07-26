@@ -2,7 +2,6 @@ export const LOADING_QUESTIONS         = 'LOADING_QUESTIONS';
 export const RECEIVE_QUESTIONS_SUCCESS = 'RECEIVE_QUESTIONS_SUCCESS';
 export const RECEIVE_QUESTIONS_ERROR   = 'RECEIVE_QUESTIONS_ERROR';
 
-
 export const AMOUNT_OPTIONS = [
     {
         "label": "10"

@@ -5,13 +5,15 @@ import HomePage from './page/HomePage';
 import GamePage from './page/GamePage';
 
 import './index.css';
-
 import store from './store/store';
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
+import { loadState, saveState } from './localStorage';
 import registerServiceWorker from './registerServiceWorker';
+
+store.subscribe(() => {
+    saveState(store.getState())
+});
 
 const App = () => {
     return (
