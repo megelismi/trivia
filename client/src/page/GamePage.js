@@ -45,7 +45,7 @@ export class GamePage extends React.Component {
         this.getNextQuestion();
     }
 
-    getNextQuestion() {
+    getNextQuestion () {
         this.setState({
             currentQuestion: this.state.currentQuestion + 1,
             selectedAnswer:  ""
@@ -54,7 +54,7 @@ export class GamePage extends React.Component {
 
     render() {
         if (this.props.loading) {
-            return <div>loading...</div>;
+            return <div>loading...</div>; //TODO: insert a spinner
         }
 
         if (this.props.questions) {
